@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insane Flashcards - Bahasa Indonesia</title>
+    <style>
+        :root {
+            --bg-color: #f6f7fb;
+            --text-color: #303545;
+            --heading-color: #1a1a1a;
+            --primary-color: #4257b2;
+            --primary-hover-color: #364999;
+            --primary-active-transform-scale: 0.98;
+
+            --secondary-btn-bg: #e0e0e0;
+            --secondary-btn-text: #333;
+            --secondary-btn-hover-bg: #cccccc;
+
+            --danger-btn-bg: #dc3545;
+            --danger-btn-hover-bg: #c82333;
+
+            --input-bg: #ffffff;
+            --input-text-color: var(--text-color); /* Inherits from body text color */
+            --input-border-color: #dcdcdc;
+            --input-placeholder-color: #999;
+
+            --sidebar-bg: #ffffff;
+            --sidebar-border-color: #e0e4e8;
+            --sidebar-header-text-color: var(--primary-color);
+            --sidebar-link-color: #586380;
+            --sidebar-link-hover-bg: #f0f2f5;
+            --sidebar-link-hover-text: var(--primary-hover-color);
+            --sidebar-link-active-bg: #e6e9f7;
+            --sidebar-link-active-text: var(--primary-color);
+            --sidebar-link-active-border: var(--primary-color);
+
+            --card-bg: #ffffff;
+            --card-border-color: #e0e4e8;
+            --card-label-color: #888;
+            --card-content-color: var(--text-color);
+            --card-actions-icon-color: var(--sidebar-link-color);
+            --card-actions-icon-hover-color: var(--primary-color);
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+            --search-result-bg: #ffffff;
+            --search-result-border-color: var(--sidebar-border-color);
+            --search-result-hover-bg: var(--sidebar-link-hover-bg);
+            --search-result-front-text: var(--text-color);
+            --search-result-back-text: var(--sidebar-link-color);
+            --search-no-results-text: #888;
+            --search-highlight-bg: yellow;
+            --search-highlight-text: black;
+
+            --stats-summary-bg: #ffffff;
+            --stats-summary-border-color: var(--sidebar-border-color);
+            --stats-summary-strong-text: var(--primary-color);
+            --stats-summary-span-text: var(--sidebar-link-color);
+
+            --stats-graph-container-bg: #ffffff;
+            --stats-graph-container-border-color: var(--sidebar-border-color);
+            --stats-graph-axis-border-color: var(--sidebar-border-color);
+            --stats-graph-bar-bg: var(--primary-color);
+            --stats-graph-bar-value-text: #333;
+            --stats-graph-label-text: var(--sidebar-link-color);
+            --stats-graph-no-data-text: #888;
+
+            --form-bg: #ffffff;
+            --form-border-color: var(--sidebar-border-color);
+
+            --manage-item-bg: #ffffff;
+            --manage-item-border-color: var(--sidebar-border-color);
+            --manage-item-front-text: var(--text-color);
+            --manage-item-back-text: var(--sidebar-link-color);
+            --manage-no-cards-text: #888;
+
+            --feedback-success-bg: #d4edda;
+            --feedback-success-text: #155724;
+            --feedback-success-border: #c3e6cb;
+            --feedback-error-bg: #f8d7da;
+            --feedback-error-text: #721c24;
+            --feedback-error-border: #f5c6cb;
+
+            --mark-correct-bg: #90ee90;
+            --mark-incorrect-bg: #f08080;
+            --mark-text-color: #333;
+
+            --menu-toggle-bg: var(--primary-color);
+            --menu-toggle-text: white;
+
+            --transition-speed: 0.3s;
+            --transition-timing: ease;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1d24;
+            --text-color: #c5c8d2;
+            --heading-color: #e0e2e8;
+
+            --primary-color: #6a85e9;
+            --primary-hover-color: #7f99f0;
+
+            --secondary-btn-bg: #3c404c;
+            --secondary-btn-text: #e0e2e8;
+            --secondary-btn-hover-bg: #4d5260;
+
+            --danger-btn-bg: #e57373;
+            --danger-btn-hover-bg: #ef9a9a;
+
+            --input-bg: #252830;
+            --input-text-color: var(--text-color);
+            --input-border-color: #4a4f5c;
+            --input-placeholder-color: #777b84;
+
+            --sidebar-bg: #20232a;
+            --sidebar-border-color: #30343c;
+            --sidebar-header-text-color: var(--primary-color);
+            --sidebar-link-color: #a0a4ac;
+            --sidebar-link-hover-bg: #2c2f38;
+            --sidebar-link-hover-text: var(--primary-hover-color);
+            --sidebar-link-active-bg: #383c46;
+            --sidebar-link-active-text: var(--primary-color);
+            --sidebar-link-active-border: var(--primary-color);
+
+            --card-bg: #252830;
+            --card-border-color: #383c46;
+            --card-label-color: #90949c;
+            --card-content-color: var(--text-color);
+            --card-actions-icon-color: var(--sidebar-link-color);
+            --card-actions-icon-hover-color: var(--primary-color);
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+            --search-result-bg: var(--card-bg);
+            --search-result-border-color: var(--card-border-color);
+            --search-result-hover-bg: var(--sidebar-link-hover-bg);
+            --search-result-front-text: var(--text-color);
+            --search-result-back-text: var(--sidebar-link-color);
+            --search-no-results-text: #777b84;
+            --search-highlight-bg: #b8860b; /* DarkGoldenRod */
+            --search-highlight-text: #f0f0f0;
+
+            --stats-summary-bg: var(--card-bg);
+            --stats-summary-border-color: var(--card-border-color);
+            --stats-summary-strong-text: var(--primary-color);
+            --stats-summary-span-text: var(--sidebar-link-color);
+
+            --stats-graph-container-bg: var(--card-bg);
+            --stats-graph-container-border-color: var(--card-border-color);
+            --stats-graph-axis-border-color: var(--card-border-color);
+            --stats-graph-bar-bg: var(--primary-color);
+            --stats-graph-bar-value-text: var(--heading-color);
+            --stats-graph-label-text: var(--sidebar-link-color);
+            --stats-graph-no-data-text: #777b84;
+
+            --form-bg: var(--card-bg);
+            --form-border-color: var(--card-border-color);
+
+            --manage-item-bg: var(--card-bg);
+            --manage-item-border-color: var(--card-border-color);
+            --manage-item-front-text: var(--text-color);
+            --manage-item-back-text: var(--sidebar-link-color);
+            --manage-no-cards-text: #777b84;
+
+            --feedback-success-bg: #2a5730;
+            --feedback-success-text: #d4edda;
+            --feedback-success-border: #3c6e40;
+            --feedback-error-bg: #6e2c30;
+            --feedback-error-text: #f8d7da;
+            --feedback-error-border: #853c40;
+
+            --mark-correct-bg: #388e3c;
+            --mark-incorrect-bg: #d32f2f;
+            --mark-text-color: #e0e2e8;
+
+            --menu-toggle-bg: var(--primary-color);
+            --menu-toggle-text: #e0e2e8;
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            transition: background-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing);
+        }
+
+        body {
+            display: flex;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white; /* Default for primary button, dark mode adjusts if needed or use specific var */
+            font-size: 1rem;
+            transition: background-color var(--transition-speed) var(--transition-timing),
+                        color var(--transition-speed) var(--transition-timing),
+                        transform 0.1s ease;
+            margin: 0.2rem;
+        }
+        body.dark-mode button { /* For primary buttons if their text needs to change from white */
+            color: var(--heading-color); /* Example: light text on dark primary */
+        }
+
+
+        button:hover {
+            background-color: var(--primary-hover-color);
+        }
+         button:active {
+            transform: scale(var(--primary-active-transform-scale));
+        }
+
+        button.secondary {
+            background-color: var(--secondary-btn-bg);
+            color: var(--secondary-btn-text);
+        }
+         button.secondary:hover {
+            background-color: var(--secondary-btn-hover-bg);
+        }
+
+        button.danger {
+            background-color: var(--danger-btn-bg);
+            color: white; /* Usually white text on danger */
+        }
+        body.dark-mode button.danger {
+             color: var(--heading-color);
+        }
+        button.danger:hover {
+            background-color: var(--danger-btn-hover-bg);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: var(--input-bg);
+            color: var(--input-text-color);
+            transition: background-color var(--transition-speed) var(--transition-timing),
+                        color var(--transition-speed) var(--transition-timing),
+                        border-color var(--transition-speed) var(--transition-timing);
+        }
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: var(--input-placeholder-color);
+            opacity: 1; /* Firefox */
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Layout: Sidebar + Main Content */
+        #sidebar {
+            width: 220px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--sidebar-border-color);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+            position: fixed; /* Fixed sidebar */
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease, background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+            z-index: 1000;
+        }
+
+        #sidebar-header {
+            display: flex; /* For theme toggle button alignment */
+            align-items: center;
+            padding: 0 1.5rem 1rem 1.5rem;
+            border-bottom: 1px solid var(--sidebar-border-color);
+            margin-bottom: 1rem;
+            transition: border-color var(--transition-speed) var(--transition-timing);
+        }
+         #sidebar-header h2 {
+            font-size: 1.4rem;
+            color: var(--sidebar-header-text-color);
+            margin-bottom: 0;
+            transition: color var(--transition-speed) var(--transition-timing);
+         }
+        /* Theme Toggle Button in Sidebar Header */
+        #theme-toggle-button {
+            margin-left: auto; /* Pushes button to the right */
+            background-color: var(--secondary-btn-bg);
+            color: var(--secondary-btn-text);
+            border: 1px solid var(--input-border-color); /* Use input border for consistency */
+            padding: 0.3rem 0.5rem;
+            font-size: 1rem; /* Icon size */
+            border-radius: 5px;
+            cursor: pointer;
+            line-height: 1; /* Ensure icon is centered vertically */
+            transition: background-color var(--transition-speed) var(--transition-timing),
+                        color var(--transition-speed) var(--transition-timing),
+                        border-color var(--transition-speed) var(--transition-timing);
+        }
+        #theme-toggle-button:hover {
+            background-color: var(--secondary-btn-hover-bg);
+        }
+
+
+        #sidebar nav ul {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        #sidebar nav li a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--sidebar-link-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color var(--transition-speed) var(--transition-timing),
+                        color var(--transition-speed) var(--transition-timing),
+                        border-left-color var(--transition-speed) var(--transition-timing);
+            border-left: 3px solid transparent;
+        }
+
+        #sidebar nav li a:hover {
+            background-color: var(--sidebar-link-hover-bg);
+            color: var(--sidebar-link-hover-text);
+        }
+
+        #sidebar nav li a.active {
+            color: var(--sidebar-link-active-text);
+            background-color: var(--sidebar-link-active-bg);
+            border-left-color: var(--sidebar-link-active-border);
+            font-weight: 600;
+        }
+
+        #sidebar nav li a .icon {
+            margin-right: 0.8rem;
+            width: 20px; /* Ensure icons align */
+            text-align: center;
+            display: inline-block;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            margin-left: 220px; /* Same as sidebar width */
+            height: 100vh;
+            overflow-y: auto; /* Allow scrolling in content area */
+            transition: margin-left 0.3s ease, background-color var(--transition-speed) var(--transition-timing); /* Background color will be from body */
+        }
+
+        .section {
+            display: none; /* Hide sections by default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Layout Adjustments */
+        #menu-toggle {
+            display: none; /* Hidden on desktop */
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+            background: var(--menu-toggle-bg);
+            color: var(--menu-toggle-text);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            #menu-toggle { display: block; }
+            #sidebar {
+                transform: translateX(-100%);
+                height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            }
+            #sidebar.open { transform: translateX(0); }
+            #main-content {
+                margin-left: 0; padding: 2rem 1rem; padding-top: 60px;
+                height: calc(100vh - 60px);
+            }
+            .container { padding: 1rem; }
+        }
+
+        /* Review Section: Flashcard Styles */
+        #review-controls {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        #review-message {
+            color: var(--sidebar-link-color); /* Using a common subtle text color var */
+            font-style: italic;
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+
+        #flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            margin: 1rem auto;
+        }
+
+        #flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow var(--transition-speed) var(--transition-timing);
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            border-radius: 10px;
+        }
+
+        #flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden; /* Safari */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border-color);
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+
+         .card-face-content {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: auto; /* Push content up */
+            margin-top: auto; /* Push content down */
+            color: var(--card-content-color);
+            transition: color var(--transition-speed) var(--transition-timing);
+         }
+
+        .card-face-label {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 0.8rem;
+            color: var(--card-label-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+         .card-actions {
+             position: absolute;
+             bottom: 15px;
+             right: 20px;
+         }
+          .card-actions button {
+              background: none;
+              border: none;
+              color: var(--card-actions-icon-color);
+              font-size: 1.5rem; /* Icon size */
+              padding: 5px;
+              cursor: pointer;
+              transition: color var(--transition-speed) var(--transition-timing); /* Already has transition but ensure it's themeable */
+          }
+           .card-actions button:hover {
+               color: var(--card-actions-icon-hover-color);
+           }
+
+        #card-back { transform: rotateY(180deg); }
+
+        #review-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        #review-navigation button {
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+        }
+
+        #card-progress {
+            font-weight: 500;
+            color: var(--sidebar-link-color); /* Using a common subtle text color var */
+            min-width: 80px; /* Prevent layout shift */
+            text-align: center;
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+         #review-feedback {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+         }
+         #review-feedback button { /* Specific styling for these buttons if needed */
+            color: var(--mark-text-color);
+         }
+         #mark-correct { background-color: var(--mark-correct-bg) !important; }
+         #mark-incorrect { background-color: var(--mark-incorrect-bg) !important; }
+
+
+        /* Search Section */
+        #search-results {
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        #search-results ul { list-style: none; padding: 0; }
+        #search-results li {
+            background-color: var(--search-result-bg);
+            border: 1px solid var(--search-result-border-color);
+            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+         #search-results li:hover { background-color: var(--search-result-hover-bg); }
+        #search-results .front {
+            font-weight: 500;
+            color: var(--search-result-front-text);
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+        #search-results .back {
+            color: var(--search-result-back-text);
+            margin-left: 1rem;
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+        #no-results-message {
+            color: var(--search-no-results-text);
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+        mark { /* Style for highlighted search terms */
+            background-color: var(--search-highlight-bg);
+            color: var(--search-highlight-text);
+            padding: 0.1em 0;
+            border-radius: 3px;
+            transition: background-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing);
+        }
+
+
+        /* Stats Section */
+        #stats-summary {
+            background-color: var(--stats-summary-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--stats-summary-border-color);
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+        #stats-summary div { flex: 1; }
+         #stats-summary strong {
+             display: block; font-size: 1.8rem;
+             color: var(--stats-summary-strong-text);
+             margin-bottom: 0.2rem;
+             transition: color var(--transition-speed) var(--transition-timing);
+         }
+         #stats-summary span {
+             font-size: 0.9rem;
+             color: var(--stats-summary-span-text);
+             transition: color var(--transition-speed) var(--transition-timing);
+         }
+
+        #stats-graph-container {
+            background-color: var(--stats-graph-container-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--stats-graph-container-border-color);
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+        #stats-graph-container > h3 {
+            /* Already themed by general h3 */
+        }
+        #stats-graph-container > p { /* The italic message at the bottom */
+            color: var(--stats-graph-no-data-text);
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+
+        #stats-graph {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 200px;
+            border-bottom: 2px solid var(--stats-graph-axis-border-color);
+            padding-bottom: 5px;
+            margin-top: 1rem;
+            transition: border-color var(--transition-speed) var(--transition-timing);
+        }
+        #stats-graph p { /* For "No review data" message */
+             color: var(--stats-graph-no-data-text);
+             transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+
+        .graph-bar-container {
+            display: flex; flex-direction: column; align-items: center;
+            flex: 1; max-width: 50px; text-align: center;
+        }
+        .graph-bar {
+            width: 70%;
+            background-color: var(--stats-graph-bar-bg);
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            transition: height 0.5s ease-out, background-color var(--transition-speed) var(--transition-timing);
+            margin-bottom: 5px;
+        }
+         .graph-bar span { /* Value label */
+             position: absolute; top: -20px; left: 50%;
+             transform: translateX(-50%);
+             font-size: 0.8rem;
+             color: var(--stats-graph-bar-value-text);
+             font-weight: 500;
+             transition: color var(--transition-speed) var(--transition-timing);
+         }
+        .graph-label {
+            font-size: 0.75rem;
+            color: var(--stats-graph-label-text);
+            margin-top: 5px;
+            white-space: nowrap;
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+
+        /* Create/Edit Section */
+        #create-form, #edit-form {
+            background-color: var(--form-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--form-border-color);
+            max-width: 600px;
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+         #edit-form { display: none; }
+
+        .form-actions { display: flex; justify-content: flex-end; margin-top: 1rem; }
+
+        /* Manage Section */
+        #manage-card-list { margin-top: 1rem; }
+        #no-cards-manage {
+            color: var(--manage-no-cards-text);
+            transition: color var(--transition-speed) var(--transition-timing);
+        }
+        .manage-card-item {
+            background-color: var(--manage-item-bg);
+            border: 1px solid var(--manage-item-border-color);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
+        }
+        .manage-card-content { flex-grow: 1; margin-right: 1rem; }
+        .manage-card-content .front {
+             font-weight: 500;
+             color: var(--manage-item-front-text);
+             transition: color var(--transition-speed) var(--transition-timing);
+        }
+         .manage-card-content .back {
+             color: var(--manage-item-back-text);
+             font-size: 0.9rem;
+             transition: color var(--transition-speed) var(--transition-timing);
+         }
+         .manage-card-actions button {
+            margin-left: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.9rem;
+         }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+         .feedback-message {
+             padding: 0.8rem; margin-bottom: 1rem; border-radius: 5px;
+             text-align: center; font-weight: 500;
+             transition: background-color var(--transition-speed) var(--transition-timing),
+                         color var(--transition-speed) var(--transition-timing),
+                         border-color var(--transition-speed) var(--transition-timing);
+         }
+         .feedback-message.success {
+             background-color: var(--feedback-success-bg);
+             color: var(--feedback-success-text);
+             border: 1px solid var(--feedback-success-border);
+         }
+         .feedback-message.error {
+             background-color: var(--feedback-error-bg);
+             color: var(--feedback-error-text);
+             border: 1px solid var(--feedback-error-border);
+         }
+
+    </style>
+</head>
+<body>
+    <button id="menu-toggle">&#9776;</button> <!-- Burger Icon -->
+    <aside id="sidebar">
+         <div id="sidebar-header">
+             <h2>InsaneCards</h2>
+             <button id="theme-toggle-button" title="Toggle Theme">☀️</button>
+         </div>
+        <nav>
+            <ul>
+                <li><a href="#review" class="nav-link active" onclick="showSection('review', event)"><span class="icon">&#128196;</span> Review</a></li>
+                <li><a href="#create" class="nav-link" onclick="showSection('create', event)"><span class="icon">&#10133;</span> Create</a></li>
+                <li><a href="#search" class="nav-link" onclick="showSection('search', event)"><span class="icon">&#128269;</span> Search</a></li>
+                <li><a href="#stats" class="nav-link" onclick="showSection('stats', event)"><span class="icon">&#128202;</span> Stats</a></li>
+                <li><a href="#manage" class="nav-link" onclick="showSection('manage', event)"><span class="icon">&#9881;</span> Manage</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <!-- Review Section -->
+        <section id="review-section" class="section active">
+            <h1>Review Cards</h1>
+            <div id="review-controls">
+                 <button id="shuffle-button" class="secondary" title="Shuffle Deck"> <span class="icon">&#128256;</span> Shuffle</button>
+                 <span id="review-message" style="font-style: italic;">Click card or press Space to flip. Use Arrow keys to navigate.</span>
+            </div>
+
+            <div id="flashcard-container">
+                <div id="flashcard">
+                    <div class="card-face" id="card-front">
+                        <span class="card-face-label">Indonesian</span>
+                        <div class="card-face-content">Loading...</div>
+                         <div class="card-actions">
+                             <button onclick="speakCard('front')" title="Speak Indonesian">&#128266;</button>
+                         </div>
+                    </div>
+                    <div class="card-face" id="card-back">
+                         <span class="card-face-label">English</span>
+                        <div class="card-face-content"></div>
+                         <div class="card-actions">
+                            <button onclick="speakCard('back')" title="Speak English">&#128266;</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="review-navigation">
+                <button id="prev-card" title="Previous Card (Left Arrow)">&#8592;</button>
+                <span id="card-progress">0 / 0</span>
+                <button id="next-card" title="Next Card (Right Arrow)">&#8594;</button>
+            </div>
+             <div id="review-feedback">
+                 <button id="mark-correct" class="secondary"> <span class="icon">&#10004;</span> Got it Right</button>
+                 <button id="mark-incorrect" class="secondary"> <span class="icon">&#10008;</span> Needs Review</button>
+             </div>
+        </section>
+
+        <!-- Create Section -->
+        <section id="create-section" class="section">
+             <!-- Edit Form (initially hidden) -->
+             <form id="edit-form" class="hidden">
+                <h2>Edit Flashcard</h2>
+                 <div id="edit-feedback" class="feedback-message hidden"></div>
+                <input type="hidden" id="edit-card-id">
+                <div>
+                    <label for="edit-card-front">Front (e.g., Indonesian Word/Phrase):</label>
+                    <textarea id="edit-card-front" required></textarea>
+                </div>
+                <div>
+                    <label for="edit-card-back">Back (e.g., English Translation):</label>
+                    <textarea id="edit-card-back" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary" onclick="cancelEdit()">Cancel</button>
+                    <button type="submit">Save Changes</button>
+                </div>
+            </form>
+
+             <!-- Create Form (visible by default) -->
+            <form id="create-form">
+                 <h2>Create New Flashcard</h2>
+                <div id="create-feedback" class="feedback-message hidden"></div>
+                <div>
+                    <label for="new-card-front">Front (e.g., Indonesian Word/Phrase):</label>
+                    <textarea id="new-card-front" placeholder="Selamat pagi" required></textarea>
+                </div>
+                <div>
+                    <label for="new-card-back">Back (e.g., English Translation):</label>
+                    <textarea id="new-card-back" placeholder="Good morning" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Add Card</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search-section" class="section">
+            <h1>Search Flashcards</h1>
+            <input type="text" id="search-input" placeholder="Type to search front or back...">
+            <div id="search-results">
+                <ul>
+                    <!-- Search results will be populated here -->
+                </ul>
+                 <p id="no-results-message" class="hidden" style="text-align: center; margin-top: 1rem;">No matching cards found.</p>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="stats-section" class="section">
+            <h1>Statistics</h1>
+            <div id="stats-summary">
+                 <div>
+                     <strong id="stats-total-cards">0</strong>
+                     <span>Total Cards</span>
+                 </div>
+                 <div>
+                    <strong id="stats-total-reviewed">0</strong>
+                    <span>Total Reviews</span>
+                </div>
+                <div>
+                    <strong id="stats-accuracy">N/A</strong>
+                    <span>Overall Accuracy</span>
+                </div>
+            </div>
+
+            <div id="stats-graph-container">
+                 <h3>Reviews in Last 7 Days</h3>
+                <div id="stats-graph">
+                    <!-- Graph bars will be generated here -->
+                </div>
+                 <p style="text-align: center; margin-top: 1.5rem; font-style: italic;">Graph shows total reviews per day.</p>
+            </div>
+        </section>
+
+        <!-- Manage Section -->
+        <section id="manage-section" class="section">
+            <h1>Manage Cards</h1>
+             <div id="manage-feedback" class="feedback-message hidden"></div>
+             <div id="manage-card-list">
+                 <!-- Card list will be populated here -->
+                 <p id="no-cards-manage" style="text-align: center;">You haven't created any cards yet.</p>
+             </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- State Variables ---
+        let flashcards = [];
+        let stats = {
+            totalReviewed: 0,
+            totalCorrect: 0,
+            dailyHistory: {} // { 'YYYY-MM-DD': { reviewed: N, correct: M } }
+        };
+        let currentCardIndex = 0;
+        let isFlipped = false;
+        let currentSection = 'review';
+        let reviewOrder = []; // Shuffled indices for review
+        let editingCardId = null; // Track which card is being edited
+        let currentTheme = 'light'; // For theme management
+
+        // --- Preloaded Data ---
+        const preloadedCards = [
+            { front: "Rumah sakit", back: "Hospital" },
+            { front: "Kantor pos", back: "Post office" },
+            { front: "Pasar", back: "Market" },
+            { front: "Sekolah", back: "School" },
+            { front: "Toko buku", back: "Bookstore" },
+            { front: "Stasiun kereta", back: "Train station" },
+            { front: "Bandara", back: "Airport" },
+            { front: "Restoran", back: "Restaurant" },
+            { front: "Bank", back: "Bank" },
+            { front: "Apotek", back: "Pharmacy" }
+        ];
+
+        // --- DOM Elements ---
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainContent = document.getElementById('main-content');
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const themeToggleButton = document.getElementById('theme-toggle-button');
+
+
+        // Review Elements
+        const flashcardElement = document.getElementById('flashcard'); // Renamed from flashcard to avoid conflict with var
+        const cardFront = document.getElementById('card-front').querySelector('.card-face-content');
+        const cardBack = document.getElementById('card-back').querySelector('.card-face-content');
+        const cardProgress = document.getElementById('card-progress');
+        const prevCardButton = document.getElementById('prev-card');
+        const nextCardButton = document.getElementById('next-card');
+        const shuffleButton = document.getElementById('shuffle-button');
+        const markCorrectButton = document.getElementById('mark-correct');
+        const markIncorrectButton = document.getElementById('mark-incorrect');
+        const reviewMessage = document.getElementById('review-message');
+
+
+        // Create Elements
+        const createForm = document.getElementById('create-form');
+        const newCardFront = document.getElementById('new-card-front');
+        const newCardBack = document.getElementById('new-card-back');
+        const createFeedback = document.getElementById('create-feedback');
+
+         // Edit Elements
+        const editForm = document.getElementById('edit-form');
+        const editCardIdInput = document.getElementById('edit-card-id');
+        const editCardFront = document.getElementById('edit-card-front');
+        const editCardBack = document.getElementById('edit-card-back');
+        const editFeedback = document.getElementById('edit-feedback');
+
+        // Search Elements
+        const searchInput = document.getElementById('search-input');
+        const searchResultsList = document.getElementById('search-results').querySelector('ul');
+        const noResultsMessage = document.getElementById('no-results-message');
+
+
+        // Stats Elements
+        const statsTotalCards = document.getElementById('stats-total-cards');
+        const statsTotalReviewed = document.getElementById('stats-total-reviewed');
+        const statsAccuracy = document.getElementById('stats-accuracy');
+        const statsGraph = document.getElementById('stats-graph');
+
+        // Manage Elements
+        const manageCardList = document.getElementById('manage-card-list');
+        const manageFeedback = document.getElementById('manage-feedback');
+        const noCardsManageMessage = document.getElementById('no-cards-manage');
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        function initApp() {
+            loadThemePreference(); // Load theme first
+            loadData();
+            setupEventListeners();
+            showSection(currentSection); // Show initial section
+            if (flashcards.length > 0) {
+                startReview(); // Start review if cards exist
+            } else {
+                updateReviewUIEmpty();
+            }
+             updateManageList(); // Populate manage list initially
+             updateStatsDisplay(); // Populate stats initially
+        }
+
+        // --- Theme Management ---
+        function loadThemePreference() {
+            const savedTheme = localStorage.getItem('flashcardTheme');
+            if (savedTheme) {
+                currentTheme = savedTheme;
+                if (currentTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggleButton.textContent = '🌙';
+                } else {
+                    document.body.classList.remove('dark-mode'); // Ensure it's removed if saved was light
+                    themeToggleButton.textContent = '☀️';
+                }
+            } else {
+                // Default to light, button already shows sun, body has no dark-mode class
+                themeToggleButton.textContent = '☀️';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                currentTheme = 'dark';
+                themeToggleButton.textContent = '🌙';
+            } else {
+                currentTheme = 'light';
+                themeToggleButton.textContent = '☀️';
+            }
+            localStorage.setItem('flashcardTheme', currentTheme);
+        }
+
+
+        // --- Data Persistence (localStorage) ---
+        function saveData() {
+            try {
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                localStorage.setItem('flashcardStats', JSON.stringify(stats));
+            } catch (e) {
+                console.error("Error saving data to localStorage:", e);
+            }
+        }
+
+        function loadData() {
+            try {
+                const storedCards = localStorage.getItem('flashcards');
+                const storedStats = localStorage.getItem('flashcardStats');
+
+                if (storedCards) {
+                    flashcards = JSON.parse(storedCards);
+                    flashcards = flashcards.map(card => ({
+                        id: card.id || generateId(),
+                        front: card.front,
+                        back: card.back,
+                         reviewCount: card.reviewCount || 0,
+                        correctCount: card.correctCount || 0
+                    }));
+                } else {
+                    flashcards = preloadedCards.map(card => ({
+                        ...card,
+                        id: generateId(),
+                        reviewCount: 0,
+                         correctCount: 0
+                    }));
+                }
+
+                if (storedStats) {
+                    stats = JSON.parse(storedStats);
+                     stats.totalReviewed = stats.totalReviewed || 0;
+                     stats.totalCorrect = stats.totalCorrect || 0;
+                     stats.dailyHistory = stats.dailyHistory || {};
+                } else {
+                     stats = { totalReviewed: 0, totalCorrect: 0, dailyHistory: {} };
+                 }
+            } catch (e) {
+                console.error("Error loading data from localStorage:", e);
+                flashcards = preloadedCards.map(card => ({
+                    ...card,
+                    id: generateId(),
+                     reviewCount: 0,
+                    correctCount: 0
+                }));
+                stats = { totalReviewed: 0, totalCorrect: 0, dailyHistory: {} };
+            }
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+        }
+
+        // --- Event Listeners Setup ---
+        function setupEventListeners() {
+            menuToggle.addEventListener('click', toggleSidebar);
+            themeToggleButton.addEventListener('click', toggleTheme); // Theme toggle
+             mainContent.addEventListener('click', () => {
+                 if (sidebar.classList.contains('open')) {
+                     sidebar.classList.remove('open');
+                 }
+             });
+
+            flashcardElement.addEventListener('click', flipCard);
+            document.addEventListener('keydown', handleKeyPress);
+            prevCardButton.addEventListener('click', prevCard);
+            nextCardButton.addEventListener('click', nextCard);
+            shuffleButton.addEventListener('click', startReview);
+            markCorrectButton.addEventListener('click', () => recordReview(true));
+            markIncorrectButton.addEventListener('click', () => recordReview(false));
+
+            createForm.addEventListener('submit', handleAddCard);
+            editForm.addEventListener('submit', handleSaveChanges);
+            searchInput.addEventListener('input', handleSearchInput);
+            manageCardList.addEventListener('click', handleManageActions);
+        }
+
+        // --- Navigation Logic ---
+        function showSection(sectionId, event) {
+            if (event) event.preventDefault();
+
+            if (sectionId !== 'manage' && sectionId !== 'create') {
+                 cancelEdit();
+            }
+
+            currentSection = sectionId;
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(`${sectionId}-section`).classList.add('active');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+
+             if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                 sidebar.classList.remove('open');
+             }
+
+            if (sectionId === 'review') {
+                if (flashcards.length > 0 && reviewOrder.length === 0) {
+                     startReview();
+                 } else if (flashcards.length > 0) {
+                    displayCard(currentCardIndex);
+                 } else {
+                    updateReviewUIEmpty();
+                 }
+            } else if (sectionId === 'stats') {
+                updateStatsDisplay();
+            } else if (sectionId === 'search') {
+                handleSearchInput();
+                 searchInput.focus();
+            } else if (sectionId === 'manage') {
+                 updateManageList();
+             }
+        }
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+        }
+
+        // --- Review Logic ---
+        function startReview() {
+            if (flashcards.length === 0) {
+                updateReviewUIEmpty();
+                return;
+            }
+            shuffleReviewOrder();
+            currentCardIndex = 0;
+            isFlipped = false;
+            displayCard(currentCardIndex);
+             reviewMessage.textContent = "Click card or press Space to flip. Use Arrow keys to navigate.";
+             markCorrectButton.disabled = false;
+             markIncorrectButton.disabled = false;
+             nextCardButton.disabled = false;
+             prevCardButton.disabled = false;
+             shuffleButton.disabled = false; // Ensure shuffle is enabled if cards exist
+             flashcardElement.style.cursor = 'pointer';
+        }
+
+         function updateReviewUIEmpty() {
+             cardFront.textContent = "No cards available.";
+             cardBack.textContent = "Create some cards first!";
+             cardProgress.textContent = "0 / 0";
+             flashcardElement.classList.remove('flipped');
+             isFlipped = false;
+             reviewMessage.textContent = "No cards to review. Go to 'Create' to add some!";
+             markCorrectButton.disabled = true;
+             markIncorrectButton.disabled = true;
+             nextCardButton.disabled = true;
+             prevCardButton.disabled = true;
+             shuffleButton.disabled = true;
+             flashcardElement.style.cursor = 'default';
+         }
+
+
+        function shuffleReviewOrder() {
+            reviewOrder = flashcards.map((_, index) => index);
+            for (let i = reviewOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [reviewOrder[i], reviewOrder[j]] = [reviewOrder[j], reviewOrder[i]];
+            }
+        }
+
+
+        function displayCard(index) {
+            if (flashcards.length === 0 || reviewOrder.length === 0 || index < 0 || index >= reviewOrder.length) {
+                 if (flashcards.length === 0) updateReviewUIEmpty();
+                 return;
+             }
+
+            const card = flashcards[reviewOrder[index]];
+            if (!card) return;
+
+            cardFront.textContent = card.front;
+            cardBack.textContent = card.back;
+            isFlipped = false;
+            flashcardElement.classList.remove('flipped');
+            cardProgress.textContent = `${index + 1} / ${flashcards.length}`;
+
+            markCorrectButton.style.display = 'inline-block';
+            markIncorrectButton.style.display = 'inline-block';
+            document.getElementById('review-feedback').style.display = 'flex';
+
+            markCorrectButton.disabled = false;
+            markIncorrectButton.disabled = false;
+        }
+
+
+        function flipCard() {
+             if (flashcards.length === 0) return;
+            isFlipped = !isFlipped;
+            flashcardElement.classList.toggle('flipped', isFlipped);
+        }
+
+        function nextCard() {
+             if (flashcards.length === 0) return;
+            currentCardIndex = (currentCardIndex + 1) % reviewOrder.length;
+            displayCard(currentCardIndex);
+        }
+
+        function prevCard() {
+             if (flashcards.length === 0) return;
+            currentCardIndex = (currentCardIndex - 1 + reviewOrder.length) % reviewOrder.length;
+            displayCard(currentCardIndex);
+        }
+
+        function handleKeyPress(event) {
+            if (currentSection !== 'review' || flashcards.length === 0) return;
+
+            switch (event.key) {
+                case ' ':
+                    event.preventDefault();
+                    flipCard();
+                    break;
+                case 'ArrowRight':
+                     recordReview(null);
+                    nextCard();
+                    break;
+                case 'ArrowLeft':
+                     recordReview(null);
+                    prevCard();
+                    break;
+            }
+        }
+
+        function recordReview(isCorrect) {
+             if (flashcards.length === 0 || currentCardIndex >= reviewOrder.length) return;
+
+            const cardRealIndex = reviewOrder[currentCardIndex];
+            const card = flashcards[cardRealIndex];
+            if (!card) return;
+
+            card.reviewCount = (card.reviewCount || 0) + 1;
+            if (isCorrect === true) {
+                card.correctCount = (card.correctCount || 0) + 1;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            if (!stats.dailyHistory[today]) {
+                 stats.dailyHistory[today] = { reviewed: 0, correct: 0 };
+            }
+            stats.dailyHistory[today].reviewed++;
+            stats.totalReviewed++;
+            if (isCorrect === true) {
+                 stats.dailyHistory[today].correct++;
+                 stats.totalCorrect++;
+            }
+
+            saveData();
+
+            if (isCorrect !== null) {
+                markCorrectButton.disabled = true;
+                markIncorrectButton.disabled = true;
+
+                const feedbackGlowColor = isCorrect ?
+                    getComputedStyle(markCorrectButton).backgroundColor :
+                    getComputedStyle(markIncorrectButton).backgroundColor;
+                const defaultCardShadow = getComputedStyle(document.documentElement).getPropertyValue('--card-shadow').trim();
+
+
+                flashcardElement.style.transition = 'none';
+                flashcardElement.style.boxShadow = `0 0 15px 5px ${feedbackGlowColor}`;
+
+                setTimeout(() => {
+                    flashcardElement.style.transition = `transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow ${getComputedStyle(document.documentElement).getPropertyValue('--transition-speed').trim()} ${getComputedStyle(document.documentElement).getPropertyValue('--transition-timing').trim()}`;
+                    flashcardElement.style.boxShadow = defaultCardShadow;
+                    nextCard();
+                }, 300);
+            }
+         }
+
+
+        // --- Text-to-Speech ---
+        function speakCard(face) {
+             if (flashcards.length === 0 || !('speechSynthesis' in window)) {
+                 alert('Sorry, your browser does not support text-to-speech.');
+                 return;
+             }
+             const card = flashcards[reviewOrder[currentCardIndex]];
+             if (!card) return;
+
+            const textToSpeak = (face === 'front') ? card.front : card.back;
+            const langCode = (face === 'front') ? 'id-ID' : 'en-US';
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = langCode;
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+
+
+        // --- Create Logic ---
+        function handleAddCard(event) {
+            event.preventDefault();
+            const front = newCardFront.value.trim();
+            const back = newCardBack.value.trim();
+
+            if (!front || !back) {
+                showFeedback(createFeedback, 'Please fill in both front and back fields.', 'error');
+                return;
+            }
+
+            const newCard = {
+                id: generateId(), front, back, reviewCount: 0, correctCount: 0
+            };
+            flashcards.push(newCard);
+            saveData();
+            showFeedback(createFeedback, 'Flashcard added successfully!', 'success');
+            newCardFront.value = ''; newCardBack.value = ''; newCardFront.focus();
+
+            if (reviewOrder.length === 0 && flashcards.length === 1) {
+                startReview();
+            } else {
+                reviewOrder.push(flashcards.length - 1);
+                 updateReviewUIForNewCard();
+            }
+            updateManageList(); updateStatsDisplay();
+        }
+
+         function updateReviewUIForNewCard() {
+             if (currentSection === 'review' && flashcards.length > 0) {
+                 cardProgress.textContent = `${currentCardIndex + 1} / ${flashcards.length}`;
+                 markCorrectButton.disabled = false;
+                 markIncorrectButton.disabled = false;
+                 nextCardButton.disabled = false;
+                 prevCardButton.disabled = false;
+                 shuffleButton.disabled = false;
+                 flashcardElement.style.cursor = 'pointer';
+                  if (reviewOrder.length === flashcards.length && flashcards.length === 1) {
+                     displayCard(0);
+                  }
+             }
+         }
+
+
+        // --- Search Logic ---
+        function handleSearchInput() {
+            const query = searchInput.value.toLowerCase().trim();
+            searchResultsList.innerHTML = '';
+
+            if (!query && currentSection === 'search') {
+                 noResultsMessage.classList.add('hidden');
+                return;
+             }
+
+            const results = flashcards.filter(card =>
+                card.front.toLowerCase().includes(query) ||
+                card.back.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                 noResultsMessage.classList.add('hidden');
+                results.forEach(card => {
+                    const li = document.createElement('li');
+                    li.dataset.cardId = card.id;
+                    li.innerHTML = `
+                        <span class="front">${highlightMatch(card.front, query)}</span>
+                        <span class="back">${highlightMatch(card.back, query)}</span>
+                    `;
+                     li.addEventListener('click', () => jumpToCard(card.id));
+                    searchResultsList.appendChild(li);
+                });
+            } else {
+                if (query) { noResultsMessage.classList.remove('hidden'); }
+                else { noResultsMessage.classList.add('hidden'); }
+            }
+        }
+
+         function highlightMatch(text, query) {
+             if (!query) return text;
+             const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+             return text.replace(regex, '<mark>$1</mark>');
+         }
+
+         function jumpToCard(cardId) {
+             const cardIndex = flashcards.findIndex(card => card.id === cardId);
+             if (cardIndex === -1) return;
+             const reviewIndex = reviewOrder.findIndex(idx => idx === cardIndex);
+             if (reviewIndex !== -1) {
+                 currentCardIndex = reviewIndex;
+                 showSection('review');
+                 displayCard(currentCardIndex);
+             } else {
+                  alert("Card found, but not in the current shuffled review cycle. Shuffle the deck or find it in 'Manage'.");
+             }
+         }
+
+
+        // --- Statistics Logic ---
+        function updateStatsDisplay() {
+            statsTotalCards.textContent = flashcards.length;
+            statsTotalReviewed.textContent = stats.totalReviewed || 0;
+            const accuracy = (stats.totalReviewed > 0)
+                ? ((stats.totalCorrect / stats.totalReviewed) * 100).toFixed(1) + '%' : 'N/A';
+            statsAccuracy.textContent = accuracy;
+            renderStatsGraph();
+        }
+
+        function renderStatsGraph() {
+            statsGraph.innerHTML = '';
+            const today = new Date();
+            let maxReviews = 0;
+            const last7DaysData = [];
+
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(today.getDate() - i);
+                const dateString = date.toISOString().split('T')[0];
+                const dayData = stats.dailyHistory[dateString] || { reviewed: 0, correct: 0 };
+                const dayLabel = date.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' });
+                last7DaysData.push({ label: dayLabel, reviewed: dayData.reviewed });
+                if (dayData.reviewed > maxReviews) maxReviews = dayData.reviewed;
+            }
+
+            const scaleFactor = maxReviews > 0 ? (180 / maxReviews) : 0;
+
+            if (last7DaysData.every(d => d.reviewed === 0)) {
+                 statsGraph.innerHTML = '<p style="width: 100%; text-align:center;">No review data for the last 7 days.</p>';
+                 return;
+             }
+
+            last7DaysData.forEach(day => {
+                 const barContainer = document.createElement('div');
+                 barContainer.className = 'graph-bar-container';
+                const bar = document.createElement('div');
+                bar.className = 'graph-bar';
+                const barHeight = day.reviewed > 0 ? Math.max(5, day.reviewed * scaleFactor) : 0;
+                bar.style.height = `${barHeight}px`;
+                const valueLabel = document.createElement('span');
+                valueLabel.textContent = day.reviewed;
+                bar.appendChild(valueLabel);
+                const label = document.createElement('div');
+                label.className = 'graph-label';
+                label.textContent = day.label;
+                barContainer.appendChild(bar);
+                barContainer.appendChild(label);
+                statsGraph.appendChild(barContainer);
+            });
+        }
+
+
+         // --- Manage Logic ---
+         function updateManageList() {
+             manageCardList.innerHTML = '';
+             if (flashcards.length === 0) {
+                 noCardsManageMessage.style.display = 'block';
+             } else {
+                 noCardsManageMessage.style.display = 'none';
+                 flashcards.forEach(card => {
+                     const item = document.createElement('div');
+                     item.className = 'manage-card-item';
+                     item.dataset.cardId = card.id;
+                     item.innerHTML = `
+                         <div class="manage-card-content">
+                             <div class="front">${card.front}</div>
+                             <div class="back">${card.back}</div>
+                         </div>
+                         <div class="manage-card-actions">
+                             <button class="button-edit secondary" data-id="${card.id}"> <span class="icon">&#9998;</span> Edit</button>
+                             <button class="button-delete danger" data-id="${card.id}"> <span class="icon">&#128465;</span> Delete</button>
+                         </div>
+                     `;
+                     manageCardList.appendChild(item);
+                 });
+             }
+         }
+
+         function handleManageActions(event) {
+             const target = event.target.closest('button');
+             if (!target) return;
+             const cardId = target.dataset.id;
+             if (target.classList.contains('button-edit')) startEditing(cardId);
+             else if (target.classList.contains('button-delete')) deleteCard(cardId);
+         }
+
+
+         function startEditing(cardId) {
+             const card = flashcards.find(c => c.id === cardId);
+             if (!card) return;
+             editingCardId = cardId;
+             editCardIdInput.value = card.id;
+             editCardFront.value = card.front;
+             editCardBack.value = card.back;
+             createForm.classList.add('hidden');
+             editForm.classList.remove('hidden');
+             editCardFront.focus();
+             editForm.scrollIntoView({ behavior: 'smooth' });
+             hideFeedback(editFeedback); hideFeedback(createFeedback);
+         }
+
+         function cancelEdit() {
+             editingCardId = null;
+             editForm.classList.add('hidden');
+             createForm.classList.remove('hidden');
+             editCardIdInput.value = ''; editCardFront.value = ''; editCardBack.value = '';
+             hideFeedback(editFeedback);
+         }
+
+         function handleSaveChanges(event) {
+             event.preventDefault();
+             if (!editingCardId) return;
+             const front = editCardFront.value.trim();
+             const back = editCardBack.value.trim();
+             if (!front || !back) {
+                 showFeedback(editFeedback, 'Front and back cannot be empty.', 'error');
+                 return;
+             }
+             const cardIndex = flashcards.findIndex(c => c.id === editingCardId);
+             if (cardIndex > -1) {
+                 flashcards[cardIndex].front = front;
+                 flashcards[cardIndex].back = back;
+                 saveData();
+                 showFeedback(manageFeedback, 'Card updated successfully!', 'success');
+                 updateManageList(); cancelEdit();
+                 const reviewIndex = reviewOrder.findIndex(idx => idx === cardIndex);
+                 if (reviewIndex !== -1 && reviewIndex === currentCardIndex && currentSection === 'review') {
+                     displayCard(currentCardIndex);
+                 }
+             } else {
+                 showFeedback(editFeedback, 'Error: Card not found.', 'error');
+             }
+         }
+
+
+         function deleteCard(cardId) {
+             if (!confirm('Are you sure you want to delete this flashcard? This action cannot be undone.')) return;
+             const cardIndex = flashcards.findIndex(c => c.id === cardId);
+             if (cardIndex > -1) {
+                 flashcards.splice(cardIndex, 1);
+                 const reviewOrderIndex = reviewOrder.indexOf(cardIndex);
+                  if (reviewOrderIndex > -1) {
+                    reviewOrder.splice(reviewOrderIndex, 1);
+                    reviewOrder = reviewOrder.map(idx => (idx > cardIndex ? idx - 1 : idx));
+                     if (reviewOrderIndex === currentCardIndex) {
+                         if (currentCardIndex >= reviewOrder.length) {
+                             currentCardIndex = Math.max(0, reviewOrder.length - 1);
+                         }
+                     } else if (reviewOrderIndex < currentCardIndex) {
+                         currentCardIndex--;
+                     }
+                 }
+                 saveData();
+                 showFeedback(manageFeedback, 'Card deleted successfully.', 'success');
+                 updateManageList(); updateStatsDisplay();
+                  if (currentSection === 'review') {
+                      if (flashcards.length === 0) {
+                          updateReviewUIEmpty();
+                      } else {
+                          if (currentCardIndex >= reviewOrder.length) {
+                            currentCardIndex = Math.max(0, reviewOrder.length - 1);
+                         }
+                          displayCard(currentCardIndex);
+                      }
+                  }
+             } else {
+                  showFeedback(manageFeedback, 'Error: Could not find card to delete.', 'error');
+             }
+         }
+
+
+        // --- Utility Functions ---
+        function showFeedback(element, message, type = 'success') {
+            element.textContent = message;
+            element.className = `feedback-message ${type}`;
+            element.classList.remove('hidden');
+             setTimeout(() => {
+                 if (element.textContent === message) hideFeedback(element);
+             }, 3000);
+        }
+         function hideFeedback(element) {
+             element.classList.add('hidden');
+             element.textContent = '';
+             element.className = 'feedback-message hidden';
+         }
+
+    </script>
+</body>
+</html>
