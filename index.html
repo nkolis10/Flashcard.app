@@ -742,7 +742,13 @@
              border: 1px solid var(--feedback-error-border);
          }
 
-    </style>
+    
+@media (max-width: 768px) {
+    body.sidebar-open #menu-toggle {
+        display: none !important;
+    }
+}
+</style>
 </head>
 <body>
     <button id="menu-toggle">&#9776;</button> <!-- Burger Icon -->
@@ -1143,7 +1149,8 @@
         }
 
         function toggleSidebar() {
-            sidebar.classList.toggle('open');
+    sidebar.classList.toggle('open');
+    document.body.classList.toggle('sidebar-open', sidebar.classList.contains('open'));
         }
 
         // --- Review Logic ---
