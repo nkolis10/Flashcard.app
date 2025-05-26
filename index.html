@@ -745,7 +745,7 @@
     </style>
 </head>
 <body>
-    <button id="menu-toggle">☰</button> <!-- Burger Icon -->
+    <button id="menu-toggle">&#9776;</button> <!-- Burger Icon -->
     <aside id="sidebar">
          <div id="sidebar-header">
              <h2>InsaneCards</h2>
@@ -753,11 +753,11 @@
          </div>
         <nav>
             <ul>
-                <li><a href="#review" class="nav-link active" onclick="showSection('review', event)"><span class="icon"></span> Review</a></li>
-                <li><a href="#create" class="nav-link" onclick="showSection('create', event)"><span class="icon">➕</span> Create</a></li>
-                <li><a href="#search" class="nav-link" onclick="showSection('search', event)"><span class="icon"></span> Search</a></li>
-                <li><a href="#stats" class="nav-link" onclick="showSection('stats', event)"><span class="icon"></span> Stats</a></li>
-                <li><a href="#manage" class="nav-link" onclick="showSection('manage', event)"><span class="icon">⚙</span> Manage</a></li>
+                <li><a href="#review" class="nav-link active" onclick="showSection('review', event)"><span class="icon">&#128196;</span> Review</a></li>
+                <li><a href="#create" class="nav-link" onclick="showSection('create', event)"><span class="icon">&#10133;</span> Create</a></li>
+                <li><a href="#search" class="nav-link" onclick="showSection('search', event)"><span class="icon">&#128269;</span> Search</a></li>
+                <li><a href="#stats" class="nav-link" onclick="showSection('stats', event)"><span class="icon">&#128202;</span> Stats</a></li>
+                <li><a href="#manage" class="nav-link" onclick="showSection('manage', event)"><span class="icon">&#9881;</span> Manage</a></li>
             </ul>
         </nav>
     </aside>
@@ -767,7 +767,7 @@
         <section id="review-section" class="section active">
             <h1>Review Cards</h1>
             <div id="review-controls">
-                 <button id="shuffle-button" class="secondary" title="Shuffle Deck"> <span class="icon"></span> Shuffle</button>
+                 <button id="shuffle-button" class="secondary" title="Shuffle Deck"> <span class="icon">&#128256;</span> Shuffle</button>
                  <span id="review-message" style="font-style: italic;">Click card or press Space to flip. Use Arrow keys to navigate.</span>
             </div>
 
@@ -777,27 +777,27 @@
                         <span class="card-face-label">Indonesian</span>
                         <div class="card-face-content">Loading...</div>
                          <div class="card-actions">
-                             <button onclick="speakCard('front')" title="Speak Indonesian"></button>
+                             <button onclick="speakCard('front')" title="Speak Indonesian">&#128266;</button>
                          </div>
                     </div>
                     <div class="card-face" id="card-back">
                          <span class="card-face-label">English</span>
                         <div class="card-face-content"></div>
                          <div class="card-actions">
-                            <button onclick="speakCard('back')" title="Speak English"></button>
+                            <button onclick="speakCard('back')" title="Speak English">&#128266;</button>
                          </div>
                     </div>
                 </div>
             </div>
 
             <div id="review-navigation">
-                <button id="prev-card" title="Previous Card (Left Arrow)">←</button>
+                <button id="prev-card" title="Previous Card (Left Arrow)">&#8592;</button>
                 <span id="card-progress">0 / 0</span>
-                <button id="next-card" title="Next Card (Right Arrow)">→</button>
+                <button id="next-card" title="Next Card (Right Arrow)">&#8594;</button>
             </div>
              <div id="review-feedback">
-                 <button id="mark-correct" class="secondary"> <span class="icon">✔</span> Got it Right</button>
-                 <button id="mark-incorrect" class="secondary"> <span class="icon">✘</span> Needs Review</button>
+                 <button id="mark-correct" class="secondary"> <span class="icon">&#10004;</span> Got it Right</button>
+                 <button id="mark-incorrect" class="secondary"> <span class="icon">&#10008;</span> Needs Review</button>
              </div>
         </section>
 
@@ -1084,9 +1084,6 @@
              mainContent.addEventListener('click', () => {
                  if (sidebar.classList.contains('open')) {
                      sidebar.classList.remove('open');
-                     if (window.innerWidth <= 768) { // Only manage menu toggle on mobile
-                        menuToggle.style.display = ''; // Revert to CSS defined (block on mobile)
-                     }
                  }
              });
 
@@ -1125,7 +1122,6 @@
 
              if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
                  sidebar.classList.remove('open');
-                 menuToggle.style.display = ''; // Revert to CSS defined (block on mobile)
              }
 
             if (sectionId === 'review') {
@@ -1148,13 +1144,6 @@
 
         function toggleSidebar() {
             sidebar.classList.toggle('open');
-            if (window.innerWidth <= 768) { // Only manage menu toggle on mobile
-                if (sidebar.classList.contains('open')) {
-                    menuToggle.style.display = 'none';
-                } else {
-                    menuToggle.style.display = ''; // Revert to CSS defined (block on mobile)
-                }
-            }
         }
 
         // --- Review Logic ---
@@ -1496,8 +1485,8 @@
                              <div class="back">${card.back}</div>
                          </div>
                          <div class="manage-card-actions">
-                             <button class="button-edit secondary" data-id="${card.id}"> <span class="icon">✎</span> Edit</button>
-                             <button class="button-delete danger" data-id="${card.id}"> <span class="icon"></span> Delete</button>
+                             <button class="button-edit secondary" data-id="${card.id}"> <span class="icon">&#9998;</span> Edit</button>
+                             <button class="button-delete danger" data-id="${card.id}"> <span class="icon">&#128465;</span> Delete</button>
                          </div>
                      `;
                      manageCardList.appendChild(item);
